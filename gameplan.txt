@@ -1,5 +1,24 @@
 // Components //
 
+Game
+    - Check that ships are placed,
+    - All ships sunk, player wins
+        - Maybe show ships that have been sunk and which remain?
+
+Ships
+    - certain length, let user place of either axis
+    - check for being clicked on
+    - check for all parts of ship being clicked on
+
+Boards
+    - Let ships be placed on board
+    - Check if ship is clicked on or water
+        - maybe useeffect to check for change in ship field color?
+
+Players
+AI
+    - Implement computerplayer
+
 
 
 
