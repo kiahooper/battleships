@@ -6,9 +6,10 @@ Game
         - Maybe show ships that have been sunk and which remain?
 
 Ships
+    - coords and hitcoords, if they match a hit has been made
+    - check for all parts of ship being clicked on if length of coords is the same as hitcoords ship is sunk
     - certain length, let user place of either axis
     - check for being clicked on
-    - check for all parts of ship being clicked on
 
 Boards
     - Let ships be placed on board
