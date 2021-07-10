@@ -1,26 +1,38 @@
-const { gameBoardFactory } = require("./Gameboard")
-const { Players } = require("./Players")
+import React, { useState } from "react";
+import Gameboard from "./Gameboard";
 
-const Game = () => {
+const Game = (props) => {
+ 
+    const {player1, player2, gameboard1, gameboard2} = props;
+    const [gameOver, setGameOver] = useState(false);
+    const [winner, setWinner] = useState(null); 
 
-    const players = Players()
-    const gameboard1 = gameBoardFactory();
-    const gameboard2 = gameBoardFactory();
-    const player1 = players.Player(gameboard2);
-    const player2 = players.ComputerPlayer(gameboard1);
-    
+    const checkForWinner = () => {
+        if (gameboard2.allShipsSunk() === true) {
+            setWinner(player1);
+            setGameOver(true);
+        } else if (gameboard1.allShipsSunk() === true) {
+            setWinner(player2);
+            setGameOver(true);
+        }
+    };  
 
-    // temporarily place ships on two gameboards 
-    for (let i=0; i<gameboard1.ships.length; i++) {
-        gameBoard1.placeShip(i,0, ships[i], true);
-    })
-    for (let i=0; i<gameboard2ships.length; i++) {
-        gameBoard2.placeShip(i,0, ships[i], true);
-    })
-
-    while (gameboard1.allShipsSunk() !== true || gameboard2.allShipsSunk() !== true) {
-        players.handleTurn(player1, player2);
+    const GameOver = (props) => {
+        const {winner} = props;
+        return (
+            <div>
+                {winner === player1 ? <h1>Congrats! You win!</h1> : <h1>Game Over!</h1>}
+            </div>
+        )
     }
+
+    return (
+        <div>
+            {gameOver ? < GameOver winner={winner}/> : null }
+            < Gameboard gameboard1={gameboard1} gameboard2={gameboard2} player1={player1} player2={player2} checkForWinner={checkForWinner}/>
+        </div>
+        
+    )
 }
 
-module.exports = { Game }
+export default Game;
