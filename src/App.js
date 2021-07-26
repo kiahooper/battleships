@@ -1,9 +1,9 @@
-import GameInitializer from './Components/GameInitializer';
+import { Home } from './Components/Home';
 
 function App() {
   return (
     <div>
-      < GameInitializer />
+      < Home />
     </div>
   );
 }

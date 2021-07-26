@@ -60,6 +60,19 @@ const gameBoardFactory = () => {
         }   
     }
 
+    const placeShipsRandom = () => {
+        ships.forEach(ship => {
+            let posX = Math.floor(Math.random() * 10);
+            let posY = Math.floor(Math.random() * 10);
+            let direction = Math.floor(Math.random() * 2);
+            while (placeShip(posX, posY, ship, direction) === false) {
+                posX = Math.floor(Math.random() * 10);
+                posY = Math.floor(Math.random() * 10);
+                direction = Math.floor(Math.random() * 2);
+            };
+        });
+    };
+
     const receiveAttack = (attackCoordX, attackCoordY) => {
         if (board[attackCoordX][attackCoordY] === '#') {
             for(let i=0; i<ships.length; i++) {
@@ -110,7 +123,7 @@ const gameBoardFactory = () => {
         }
     }
 
-    return {placeShip, board, ships, receiveAttack, allShipsSunk, clearBoard}
+    return {placeShip, board, ships, receiveAttack, allShipsSunk, clearBoard, placeShipsRandom}
 }
 
 export {gameBoardFactory}

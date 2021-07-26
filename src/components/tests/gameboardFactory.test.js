@@ -1,5 +1,5 @@
 const { test, expect } = require("@jest/globals");
-const { gameBoardFactory } = require("./Gameboard");
+const { gameBoardFactory } = require("../Gameboard");
 
 test('gameboard is 2D board array of coords', () => {
     const gameBoard = gameBoardFactory();

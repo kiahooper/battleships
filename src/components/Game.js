@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import Gameboard from "./Gameboard";
+import { Gameboard } from "./Gameboard";
+import { PlaceShips } from "./PlaceShips";
 
-const Game = (props) => {
+export const Game = (props) => {
  
     const {player1, player2, gameboard1, gameboard2} = props;
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null); 
+    const startGame = true;
 
     const checkForWinner = () => {
         if (gameboard2.allShipsSunk() === true) {
@@ -29,10 +31,11 @@ const Game = (props) => {
     return (
         <div>
             {gameOver ? < GameOver winner={winner}/> : null }
-            < Gameboard gameboard1={gameboard1} gameboard2={gameboard2} player1={player1} player2={player2} checkForWinner={checkForWinner}/>
+            {startGame ? 
+            < Gameboard gameboard1={gameboard1} gameboard2={gameboard2} player1={player1} player2={player2} checkForWinner={checkForWinner} /> 
+            : 
+            < PlaceShips gameboard = {gameboard1}/>}
         </div>
         
     )
 }
-
-export default Game;

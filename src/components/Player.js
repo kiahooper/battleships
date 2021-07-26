@@ -1,8 +1,8 @@
 
 const Player = (enemyGameBoard) => {
 
-        const attack = (attackCoordX, attackCoordY) => {
-            return enemyGameBoard.receiveAttack(attackCoordX, attackCoordY);
+        const attack = (coordX, coordY) => {
+            return enemyGameBoard.receiveAttack(coordX, coordY);
             
         }
         return {attack}

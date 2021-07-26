@@ -1,5 +1,5 @@
 const { test, expect } = require("@jest/globals");
-const { shipFactory } = require("./ship");
+const { shipFactory } = require("../ship");
 
 test('expect coords to be array of given length', () => {
     const Ship = shipFactory(3);

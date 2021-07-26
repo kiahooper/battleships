@@ -1,6 +1,6 @@
 const { test, expect } = require("@jest/globals");
-const { Player } = require("./Player");
-const { gameBoardFactory } = require("./gameboardFactory");
+const { Player } = require("../Player");
+const { gameBoardFactory } = require("../gameboardFactory");
 
 
 test('player can attack enemy gameboard', () => {
