@@ -13,7 +13,7 @@ const gameBoardFactory = () => {
         ] 
 
     const placeShip = (startCoordX, startCoordY, ship, direction) => {
-
+        
         let canPlaceShip = false;
 
         try {
@@ -55,7 +55,8 @@ const gameBoardFactory = () => {
                 }
             }
         // Catch eg. boundary error of gameboard
-        } catch {
+        } catch(err) {
+            console.log(err)
             return false;
         }   
     }
@@ -81,6 +82,7 @@ const gameBoardFactory = () => {
                     board[attackCoordX][attackCoordY] = ships[i].ship.hit(index);
                     if (ships[i].ship.isSunk()) {
                         markShipAsSunk(ships[i]);
+                        return ships[i];
                     };
                     return true;
                 }

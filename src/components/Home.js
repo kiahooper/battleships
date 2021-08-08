@@ -1,8 +1,8 @@
 import React from "react";
 import { Game } from "./Game";
-const { Player } = require("./Player");
-const { ComputerPlayer } = require("./ComputerPlayer");
-const { gameBoardFactory } = require("./gameboardFactory");
+import { Player } from "../factories/Player";
+import { ComputerPlayer } from "../factories/ComputerPlayer";
+import { gameBoardFactory } from "../factories/gameboardFactory";
 
 export const Home = () => {
 

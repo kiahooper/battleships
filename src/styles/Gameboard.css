@@ -1,13 +1,13 @@
 .gameboards {
   display: flex;
   justify-content: center;
-  cursor: pointer;
 }
 
 .gameboard-grid {
   margin: 2%;
   display: grid;
   grid-template-columns: repeat(10, 40px);
+  cursor: crosshair;
 }
 
 .gameboard-grid > div {

@@ -34,7 +34,9 @@ export const ComputerPlayer = (enemyGameBoard) => {
         if (enemyGameBoard.receiveAttack(attack.split(",")[0], attack.split(",")[1])) {
             previousHit = attack;
             nextMove = "up";
+            return true;
         }
+        return false;
     }
 
     const getRandomAttack = () => {
@@ -104,8 +106,6 @@ export const ComputerPlayer = (enemyGameBoard) => {
     const checkIfShipIsSunk = (previousHit) => {
         enemyGameBoard.ships.forEach(ship => {
             if (ship.coords.indexOf(previousHit) !== -1) {
-                //console.log(previousHit)
-                //console.log(ship.ship.isSunk())
                 return ship.ship.isSunk()
             }
         }) 

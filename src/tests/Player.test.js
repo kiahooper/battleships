@@ -1,5 +1,5 @@
 const { test, expect } = require("@jest/globals");
-const { Player } = require("../Player");
+const { Player } = require("../factories/Player");
 const { gameBoardFactory } = require("../gameboardFactory");
 
 
