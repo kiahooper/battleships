@@ -1,4 +1,4 @@
-const shipFactory = (len) => {
+export const Ship = (len) => {
 
     const coords = new Array(len).fill("#");
 
@@ -15,5 +15,3 @@ const shipFactory = (len) => {
     }
     return {coords, hit, isSunk, len}
 }
-
-export {shipFactory}

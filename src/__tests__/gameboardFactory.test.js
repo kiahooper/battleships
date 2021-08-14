@@ -1,5 +1,5 @@
 const { test, expect } = require("@jest/globals");
-const { gameBoardFactory } = require("../Gameboard");
+const { gameBoardFactory } = require("../factories/gameboardFactory");
 
 test('gameboard is 2D board array of coords', () => {
     const gameBoard = gameBoardFactory();
@@ -10,15 +10,15 @@ test('gameboard is 2D board array of coords', () => {
 test('places ship on gameboard horizontally and update ship coords', () => {
     const gameBoard = gameBoardFactory();
     const ship = gameBoard.ships[2];
-    gameBoard.placeShip(0,0, ship, true);
-    expect(gameBoard.ships[2].coords).toStrictEqual(["0,0", "0,1", "0,2"]);
-    expect(gameBoard.board[0]).toStrictEqual(['#','#','#',0,0,0,0,0,0,0]);
+    gameBoard.placeShip(0,0, ship, 0);
+    expect(ship.coords).toStrictEqual(["0,0", "0,1", "0,2"]);
+    expect(gameBoard.board[0]).toStrictEqual(['#','#','#',"","","","","","",""]);
 })
 
 test('places ship on gameboard vertically and update ship coords', () => {
     const gameBoard = gameBoardFactory();
     const ship = gameBoard.ships[0];
-    gameBoard.placeShip(0,0, ship, false);
+    gameBoard.placeShip(0,0, ship, 1);
     expect(gameBoard.ships[0].coords).toStrictEqual(["0,0", "1,0", "2,0", "3,0", "4,0"]);
     expect((gameBoard.board.filter(arr => arr.indexOf("#") !== -1)).length).toBe(5);
 })
@@ -26,7 +26,7 @@ test('places ship on gameboard vertically and update ship coords', () => {
 test('expect ship to have received attack', () => {
     const gameBoard = gameBoardFactory();
     const ship = gameBoard.ships[0];
-    gameBoard.placeShip(0,0, ship, true);
+    gameBoard.placeShip(0,0, ship, 0);
     expect(ship.coords.indexOf('0,0')).not.toBe(-1);
     expect(gameBoard.receiveAttack(0,0)).toBe(true);
 })
@@ -40,15 +40,15 @@ test('expect all ships not to be sunk', () => {
 test('expect all ships to be sunk', () => {
     const gameBoard = gameBoardFactory();
     const ship = gameBoard.ships[0];
-    gameBoard.placeShip(0,0, ship, true);
+    gameBoard.placeShip(0,0, ship, 0);
     const ship1 = gameBoard.ships[1];
-    gameBoard.placeShip(1,0, ship1, true);
+    gameBoard.placeShip(1,0, ship1, 0);
     const ship2 = gameBoard.ships[2];
-    gameBoard.placeShip(2,0, ship2, true);
+    gameBoard.placeShip(2,0, ship2, 0);
     const ship3 = gameBoard.ships[3];
-    gameBoard.placeShip(3,0, ship3, true);
+    gameBoard.placeShip(3,0, ship3, 0);
     const ship4 = gameBoard.ships[4];
-    gameBoard.placeShip(4,0, ship4, true);
+    gameBoard.placeShip(4,0, ship4, 0);
 
     gameBoard.receiveAttack(0,0);
     gameBoard.receiveAttack(0,1);
@@ -71,3 +71,18 @@ test('expect all ships to be sunk', () => {
     expect(gameBoard.allShipsSunk()).toBe(true);
 })
 
+test('expect ship to be marked as sunk when sunk', () => {
+    const gameBoard = gameBoardFactory();
+    const ship = gameBoard.ships[0];
+    gameBoard.placeShip(0,0, ship, 0);
+    gameBoard.markShipAsSunk(ship);
+    expect(gameBoard.board[0]).toStrictEqual(['+','+','+',"+","+","","","","",""]);
+})
+
+test('expect board to be cleared', () => {
+    const gameBoard = gameBoardFactory();
+    const ship = gameBoard.ships[0];
+    gameBoard.placeShip(0,0, ship, 0);
+    gameBoard.clearBoard()
+    expect((gameBoard.board.filter(arr => arr.indexOf("#") !== -1)).length).toBe(0);
+})

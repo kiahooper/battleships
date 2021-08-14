@@ -13,7 +13,7 @@ export const Home = () => {
     const player2 = ComputerPlayer(gameboard1);
 
     return (
-        <div>
+        <div className="home">
             <h1>Battleships</h1>
             < Game gameboard1={gameboard1} gameboard2={gameboard2} player1={player1} player2={player2} />
         </div>

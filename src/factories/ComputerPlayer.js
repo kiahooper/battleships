@@ -5,36 +5,23 @@ export const ComputerPlayer = (enemyGameBoard) => {
     let nextMove = "up";
 
     const attack = () => {
-
         let attack; 
-        console.log(previousHit)
-        
-        // not working 
-        let shipSunk = checkIfShipIsSunk(previousHit)
-        console.log(checkIfShipIsSunk(previousHit))
-        
-
         if (previousHit === null) {
-            console.log("random")
             attack = getRandomAttack();
-        } else if (previousHit !== null && shipSunk) {
-            // not working
-            console.log("ship sunk random");
+        } else if (previousHit !== null && checkIfShipIsSunk(previousHit)) {
             attack = getRandomAttack();
         } else {
             attack = getSurroundingAttack();
-            console.log("surrounding")
             if (!attack) {
                 attack = getRandomAttack();
             }
         }
-
         previousAttacks.push(attack);
-        
-        if (enemyGameBoard.receiveAttack(attack.split(",")[0], attack.split(",")[1])) {
+        let newAttack = enemyGameBoard.receiveAttack(attack.split(",")[0], attack.split(",")[1])
+        if (newAttack === true || newAttack.name !== undefined) {
             previousHit = attack;
             nextMove = "up";
-            return true;
+            return newAttack;
         }
         return false;
     }
@@ -78,7 +65,7 @@ export const ComputerPlayer = (enemyGameBoard) => {
         }
 
         while (previousAttacks.indexOf(attack) !== -1 || coordX < 0 || coordY < 0 || coordX > 9 || coordY > 9) {
-            console.log(attack)
+            //console.log(attack)
             if (nextMove === "up" && previousHit !== null) {
                 coordX--;
                 attack = `${coordX},${coordY}`;
@@ -103,14 +90,15 @@ export const ComputerPlayer = (enemyGameBoard) => {
         return attack; 
     }
 
-    const checkIfShipIsSunk = (previousHit) => {
+    const checkIfShipIsSunk = (coord) => {
+        let shipSunk = false;
         enemyGameBoard.ships.forEach(ship => {
-            if (ship.coords.indexOf(previousHit) !== -1) {
-                return ship.ship.isSunk()
+            if (ship.coords.indexOf(coord) !== -1) {
+                shipSunk = ship.ship.isSunk()
             }
         }) 
-        return false;
+        return shipSunk; 
     }
 
-    return {attack, previousAttacks}
+    return {attack, previousAttacks, checkIfShipIsSunk, getSurroundingAttack, getRandomAttack}
 }

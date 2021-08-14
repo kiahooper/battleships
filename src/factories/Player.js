@@ -1,5 +1,4 @@
-
-const Player = (enemyGameBoard) => {
+export const Player = (enemyGameBoard) => {
 
         const attack = (coordX, coordY) => {
             return enemyGameBoard.receiveAttack(coordX, coordY);
@@ -7,8 +6,3 @@ const Player = (enemyGameBoard) => {
         }
         return {attack}
     }
-
-
-
-export {Player}
-

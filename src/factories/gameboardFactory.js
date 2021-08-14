@@ -1,21 +1,19 @@
-import { shipFactory } from "./Ship";
+import { Ship } from "./Ship";
 
 const gameBoardFactory = () => {
 
     const board = Array(10).fill().map(() => Array(10).fill(""));
 
     const ships = [
-        {name: 'Carrier', ship: shipFactory(5), coords: []}, 
-        {name: 'Battleship', ship: shipFactory(4), coords: []}, 
-        {name: 'Cruiser', ship: shipFactory(3), coords: []}, 
-        {name: 'Submarine', ship: shipFactory(3), coords: []}, 
-        {name: 'Destroyer', ship: shipFactory(2), coords: []}
+        {name: 'Carrier', ship: Ship(5), coords: []}, 
+        {name: 'Battleship', ship: Ship(4), coords: []}, 
+        {name: 'Cruiser', ship: Ship(3), coords: []}, 
+        {name: 'Submarine', ship: Ship(3), coords: []}, 
+        {name: 'Destroyer', ship: Ship(2), coords: []}
         ] 
 
     const placeShip = (startCoordX, startCoordY, ship, direction) => {
-        
         let canPlaceShip = false;
-
         try {
             // horizontal placement
             if (direction === 0) {
@@ -87,8 +85,8 @@ const gameBoardFactory = () => {
                     return true;
                 }
             } 
-        } else if (board[attackCoordX][attackCoordY] === 'X') {
-            return false;
+        } else if (board[attackCoordX][attackCoordY] === 'X' || board[attackCoordX][attackCoordY] === '+' || board[attackCoordX][attackCoordY] === '~') {
+            throw new Error('Already clicked there!');
         }
         board[attackCoordX][attackCoordY] = '~';
         return false;
@@ -113,11 +111,9 @@ const gameBoardFactory = () => {
     }
 
     const clearBoard = () => {
-
         ships.forEach(ship => {
             ship.coords = [];
         });
-
         for(let i=0; i<board.length; i++) {
             for(let j=0; j<board.length; j++) {
                 board[i][j] = "";
@@ -125,7 +121,7 @@ const gameBoardFactory = () => {
         }
     }
 
-    return {placeShip, board, ships, receiveAttack, allShipsSunk, clearBoard, placeShipsRandom}
+    return {placeShip, board, ships, receiveAttack, allShipsSunk, clearBoard, placeShipsRandom, markShipAsSunk}
 }
 
 export {gameBoardFactory}

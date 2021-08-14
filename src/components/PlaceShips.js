@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Gameboard } from './Gameboard';
-import { InfoBoard } from './InfoBoard';
 
 export const PlaceShips = (props) => {
 
     const {gameboard, setStartGame, placeShips} = props;
     const [currentShipIndex, setCurrentShipIndex] = useState(0);
     const [axis, setAxis] = useState(false);
-    const [canClick, setCanClick] = useState(true);
 
+    // context??
     // useEffect(() => {
     //     let currentShip = gameboard.ships[currentShipIndex].name
     //     setText(`Place your ${currentShip}`)
@@ -23,7 +22,6 @@ export const PlaceShips = (props) => {
                 return;
             } else if (currentShipIndex === 4) {
                 setCurrentShipIndex(0);
-                setCanClick(false);
                 setStartGame(true);
             } else {
                 setCurrentShipIndex(currentShipIndex + 1)
@@ -32,9 +30,9 @@ export const PlaceShips = (props) => {
     }
 
     return (
-        <div>
+        <div className="placeShips">
             <button onClick={() => {setAxis(!axis)}}>{axis ? 'Horizontal' : 'Vertical'}</button>
-            < Gameboard gameboard={gameboard.board} canClick={canClick} handleClick={handlePlaceShips} placeShips={true}/>
+            < Gameboard gameboard={gameboard.board} canClick={true} handleClick={handlePlaceShips} placeShips={true}/>
         </div>
     )
 }

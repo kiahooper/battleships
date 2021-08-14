@@ -8,6 +8,8 @@ export const Game = (props) => {
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null); 
     const [startGame, setStartGame] = useState(false);
+    const [turn, setTurn] = useState(true);
+    const [attack, setAttack] = useState(null);
 
     const checkForWinner = () => {
         if (gameboard2.allShipsSunk() === true) {
@@ -21,7 +23,15 @@ export const Game = (props) => {
 
     return (
         <div>
-            < InfoBoard gameOver={gameOver} winner={winner} player1={player1} player2={player2} />
+            < InfoBoard 
+                gameOver={gameOver} 
+                winner={winner} 
+                player1={player1} 
+                player2={player2} 
+                attack={attack} 
+                turn={turn}
+                startGame={startGame}
+            />
             < Gameboards 
                 gameboard1={gameboard1} 
                 gameboard2={gameboard2} 
@@ -30,6 +40,10 @@ export const Game = (props) => {
                 checkForWinner={checkForWinner} 
                 startGame={startGame} 
                 setStartGame={setStartGame}
+                turn={turn}
+                setTurn={setTurn}
+                setAttack={setAttack}
+                gameOver={gameOver}
             /> 
         </div>
         

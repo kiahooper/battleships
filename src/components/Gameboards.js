@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import '../styles/Gameboard.css';
 import { Gameboard } from './Gameboard';
 import { PlaceShips } from "./PlaceShips";
 
@@ -13,12 +12,40 @@ const {
   checkForWinner, 
   startGame, 
   setStartGame,
-  setText,
+  turn,
+  setTurn,
+  setAttack,
+  gameOver
 } = props;
 
 const [board1, setBoard1] = useState(gameboard1.board);
 const [board2, setBoard2] = useState(gameboard2.board);
 const [canClick, setCanClick] = useState(true);
+
+const sleep = m => new Promise(r => setTimeout(r, m))
+
+useEffect(() => {
+  async function handleComputerTurn() {
+    try {
+      await sleep(1000);
+      let attack = player2.attack()
+      await setAttack(attack);
+      checkForWinner()
+      setBoard2([...board2]);
+      await sleep(1000);
+      await setAttack(null);
+      await setTurn(true);
+      setCanClick(true);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  if (!turn && !gameOver) {
+    handleComputerTurn();
+  }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, [turn]);
+
 
 const placeShips = (startCoordX, startCoordY, ship, direction) => {
   if (gameboard1.placeShip(startCoordX,startCoordY,ship, direction) === false){
@@ -30,38 +57,23 @@ const placeShips = (startCoordX, startCoordY, ship, direction) => {
   }
 }
 
-const handleTurn = (e) => {
+async function handleTurn(e) {
+    let newAttack;
     try {
-        setCanClick(false);
-        let attack = player1.attack(e.target.dataset.x, e.target.dataset.y);
-        setText(checkAttack(attack));
-        checkForWinner();
-        setBoard1([...board1]);
-        setTimeout(() => {
-          setText('Enemy aims...')
-          let attack = player2.attack();        
-          checkForWinner();
-          setTimeout(() => {
-            setText(checkAttack(attack))
-          }, 1000)
-          setBoard2([...board2]);
-          setCanClick(true)
-        }, 1200);
-        
-
-    } catch(err) {
-        console.log(err);
+      newAttack = player1.attack(e.target.dataset.x, e.target.dataset.y);  
+    } catch (err) {
+      console.log(err.message);
+      return;
     }
+    setCanClick(false)
+    await setAttack(newAttack);
+    checkForWinner();
+    setBoard1([...board1]);
+    await sleep(1000)
+    await setAttack(null);
+    await setTurn(false);
 }
 
-const checkAttack = (attack) => {
-  if (attack !== true && attack !== false) {
-    return `Enemy's ${attack.name} was sunk!`
-  } else {
-    return attack ? "Hit!" : "Miss!";
-  }
-
-}
 
   return (
     <div>
@@ -71,14 +83,14 @@ const checkAttack = (attack) => {
             gameboard={board1} 
             canClick={false} 
             placeShips={false}
-            computer={true}
+            computer={false}
           />
           < Gameboard 
             gameboard={board2} 
             canClick={canClick} 
             handleClick={handleTurn} 
             placeShips={false}
-            computer={false}
+            computer={true}
           />
         </div>
         : 
@@ -86,6 +98,7 @@ const checkAttack = (attack) => {
           gameboard={gameboard1} 
           setStartGame={setStartGame} 
           placeShips={placeShips}
+          computer={false}
         />
         }
     </div>
