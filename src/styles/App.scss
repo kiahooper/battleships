@@ -4,15 +4,27 @@
 @import "./infoBoard";
 @import "./gameboards";
 @import "./placeShips";
+@import "/node_modules/include-media/dist/_include-media.scss";
 
 html,
 body {
   text-align: center;
   color: white;
   height: 100%;
+  width: 100%;
   margin: 0;
   background: radial-gradient(circle at center, $bckgrndClr, black);
   font-family: $mainFont;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 1%;
+}
+
+div {
+  margin: 0;
+  width: 100%;
 }
 
 h1 {
@@ -28,13 +40,22 @@ h1 {
 }
 
 h2 {
-  font-size: 1.4vw;
+  font-size: 20px;
   margin: 0;
   text-transform: uppercase;
   margin-bottom: 1vw;
+  @include media("<=1024px") {
+    font-size: 14px;
+  }
+  @include media("<=phone") {
+    font-size: 12px;
+  }
 }
 
 p {
   margin: 0;
-  font-size: 1vw;
+  font-size: 16px;
+  @include media("<=1024px") {
+    font-size: 10px;
+  }
 }

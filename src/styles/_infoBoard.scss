@@ -1,9 +1,17 @@
+@import "/node_modules/include-media/dist/_include-media.scss";
+
 .infoBoard {
-  @include shadedBorders(0.5em, rgb(90, 103, 116), invert);
+  @include shadedBorders(0.6vw, rgb(90, 103, 116), invert);
   background: black;
-  padding: 1vw;
+  padding: 1%;
   margin: 0 auto;
   width: 40%;
+  @include media("<=1025px") {
+    width: 50%;
+  }
+  @include media("<=425px") {
+    width: 90%;
+  }
   height: min-content;
   @include borderRadius(3px);
 

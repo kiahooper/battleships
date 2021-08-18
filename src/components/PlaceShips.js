@@ -34,7 +34,7 @@ export const PlaceShips = (props) => {
         <div className="placeShips">
             <div className="placeShipsInfo">
             <p>Place highlighted ship by clicking on gameboard. <br></br>Click on button below to choose orientation of ship.</p>
-            <button className={`slide_${axis ? 'horizontal' : 'vertical'}`} onClick={() => {setAxis(!axis)}}>{axis ? 'Horizontal' : 'Vertical'}</button>
+            <button className={`slide_${axis ? 'horizontal' : 'vertical'}`} onClick={() => {setAxis(!axis)}}>{axis ? <p>Horizontal</p> : <p>Vertical</p>}</button>
             <div className="ships">
                 {gameboard.ships.map((ship, index) => {
                     return (

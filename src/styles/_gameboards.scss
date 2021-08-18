@@ -1,19 +1,28 @@
+@import "/node_modules/include-media/dist/_include-media.scss";
+
 .gameboards {
   @include flexBox(center, center);
+  @include media("<=768px") {
+    flex-direction: column;
+  }
   margin: 2% auto;
-  width: 85%;
-
+  @include media("<=1024") {
+    width: fit-content;
+  }
   .gameRules {
+    justify-self: stretch;
     background-color: $infoGrey;
-    padding: 1.5vw;
-    width: 18%;
+    padding: 1.5%;
+    margin: 2%;
+    min-width: 250px;
+    width: min-content;
     @include borderRadius(3px);
     @include boxShadow(-3px 4px 15px -3px rgba(0, 0, 0, 0.6));
     p {
       margin: 2%;
     }
     div {
-      margin-top: 1vw;
+      margin-top: 2%;
       .bold {
         font-weight: bolder;
       }
@@ -30,22 +39,29 @@
   }
 
   .computer {
-    @include shadedBorders(0.8em, rgb(192, 4, 4));
+    @include shadedBorders(0.8vw, rgb(192, 4, 4));
     background-color: rgb(192, 4, 4);
   }
 }
 
 .gameboard {
-  @include shadedBorders(0.8em, $gameboardBckgrnd);
+  @include shadedBorders(0.8vw, $gameboardBckgrnd);
   margin: 0 auto;
+  width: fit-content;
   background-color: $gameboardBckgrnd;
-  padding: 1vw;
+  padding: 2vh;
+  @include media("<=phone") {
+    padding: 1vh;
+  }
   @include borderRadius(5px);
   .grid {
     height: min-content;
     width: min-content;
     display: grid;
-    grid-template-columns: repeat(10, 40px);
+    grid-template-columns: repeat(10, 4vh);
+    @include media("<=1025px") {
+      grid-template-columns: repeat(10, 3vh);
+    }
     cursor: crosshair;
     .ship {
       color: transparent;
@@ -68,9 +84,12 @@
       @include flexBox(center, center);
       @include boxShadow(0 0 0.3em inset &gridGreen);
       background-color: black;
-      height: 40px;
+      height: 4vh;
+      @include media("<=1025px") {
+        height: 3vh;
+      }
       border: 0.1em solid $gridGreen;
-      animation: monitorGlow 0.3s steps(100) infinite;
+      animation: monitorGlow 0.4s steps(100) infinite;
       &:hover {
         background-color: $gridGreen;
       }

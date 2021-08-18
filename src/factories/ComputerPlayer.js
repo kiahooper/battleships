@@ -4,6 +4,8 @@ export const ComputerPlayer = (enemyGameBoard) => {
     let previousHit = null;
     let nextMove = "up";
 
+    // first hit? if have gone all the way around??
+
     const attack = () => {
         let attack; 
         if (previousHit === null) {

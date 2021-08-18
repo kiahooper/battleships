@@ -1,4 +1,9 @@
+@import "/node_modules/include-media/dist/_include-media.scss";
+
 .placeShips {
+  @include media("<=425px") {
+    flex-direction: column;
+  }
   @include flexBox(center, center);
   width: min-content;
   margin: 2% auto;
@@ -6,15 +11,23 @@
   .placeShipsInfo {
     background-color: rgb(42, 43, 49);
     height: max-content;
-    padding: 3%;
+    padding: 4%;
     @include borderRadius(5px, 0, 0, 5px);
     @include boxShadow(
       inset -7px 0 10px -7px rgba(0, 0, 0, 0.7),
       -3px 4px 15px -3px rgba(0, 0, 0, 0.6)
     );
+    @include media("<=425px") {
+      width: 85%;
+      @include borderRadius(5px, 5px, 0, 0);
+      @include boxShadow(
+        inset 0 -7px 10px -7px rgba(0, 0, 0, 0.7),
+        -3px 4px 15px -3px rgba(0, 0, 0, 0.6)
+      );
+    }
 
     .ships {
-      margin-top: 10%;
+      margin-top: 1vh;
       .ship {
         @include flexBox(center, flex-end);
         margin-top: 1vh;
@@ -23,15 +36,19 @@
 
         .shipItem {
           color: transparent;
-          border: 0.1em solid white;
+          border: 0.1rem solid white;
           background-color: lightgray;
-          width: 1.8vw;
-          height: 1.8vw;
+          width: 4vh;
+          height: 4vh;
+          @include media("<=425px") {
+            width: 2.5vh;
+            height: 2.5vh;
+          }
         }
         .currentShip {
           transform: scale(1.1);
           background-color: orange;
-          @include boxShadow(0 0 0.3em white, 0 0 0.3em inset white);
+          @include boxShadow(0 0 0.3rem white, 0 0 0.3rem inset white);
         }
         .shipName {
           @include flexBox(center, center);
@@ -46,8 +63,8 @@
           }
           p {
             text-transform: uppercase;
-            letter-spacing: 0.03vw;
-            font-size: 0.5vw;
+            letter-spacing: 0.05rem;
+            font-size: 0.7rem;
           }
         }
         img {
@@ -60,14 +77,15 @@
     }
   }
   button {
-    @include shadedBorders(0.3em, rgb(44, 44, 44), false);
+    @include shadedBorders(0.3rem, rgb(44, 44, 44), false);
+    outline: none;
     height: min-content;
     width: 100%;
-    margin-top: 10%;
+    margin-top: 1vh;
     text-transform: uppercase;
     font-family: $mainFont;
-    font-size: 1vw;
-    padding: 0.4em;
+    font-size: 16px;
+    padding: 3%;
     color: white;
     background-color: $infoGrey;
     position: relative;
