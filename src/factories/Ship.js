@@ -3,7 +3,7 @@ export const Ship = (len) => {
     const coords = new Array(len).fill("#");
 
     const hit = (index) => {
-        coords[index] = 'X';
+        coords[index] = 'x';
         return coords[index];
     }
 

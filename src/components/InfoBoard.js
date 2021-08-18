@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 export const InfoBoard = (props) => {
 
-    const {gameOver, winner, player1, attack, turn, startGame} = props;
+    const {gameOver, winner, player1, player2, attack, turn, startGame} = props;
 
     const [text, setText] = useState("");
 
@@ -29,9 +29,9 @@ export const InfoBoard = (props) => {
             setText("MISS!");
         } else if (typeof attack === 'object' && attack !== null && !Array.isArray(attack)) {
             let shipName = attack.name;
-            if (turn === false) {
+            if (turn === true) {
                 setText(`You sunk the enemy's ${shipName}!`);
-            } else if (turn === true) {
+            } else if (turn === false) {
                 setText(`Your ${shipName} was destroyed!`);
             }
             
@@ -43,11 +43,13 @@ export const InfoBoard = (props) => {
         if (gameOver) {
             if (winner === player1) {
                 setText("Congrats, the enemy fleet has been destroyed!");
-            } else {
+            } else if (winner === player2) {
                 setText("Game Over, your fleet has been sunk!");
+            } else {
+                setText("It's a draw!");
             }
         }
-    }, [gameOver, winner, attack, player1])
+    }, [gameOver, winner, attack, player1, player2])
 
     return (
             <div className="infoBoard">

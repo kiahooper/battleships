@@ -1,0 +1,21 @@
+.infoBoard {
+  @include shadedBorders(0.5em, rgb(90, 103, 116), invert);
+  background: black;
+  padding: 1vw;
+  margin: 0 auto;
+  width: 40%;
+  height: min-content;
+  @include borderRadius(3px);
+
+  h2 {
+    text-transform: unset;
+    box-sizing: border-box;
+    max-width: min-content;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    border-right: 0.15em solid $gridGreen; /* The typwriter cursor */
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: 0.15em; /* Adjust as needed */
+    animation: typing 1s steps(20), blink-caret 0.75s infinite;
+  }
+}

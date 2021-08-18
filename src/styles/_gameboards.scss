@@ -1,0 +1,79 @@
+.gameboards {
+  @include flexBox(center, center);
+  margin: 2% auto;
+  width: 85%;
+
+  .gameRules {
+    background-color: $infoGrey;
+    padding: 1.5vw;
+    width: 18%;
+    @include borderRadius(3px);
+    @include boxShadow(-3px 4px 15px -3px rgba(0, 0, 0, 0.6));
+    p {
+      margin: 2%;
+    }
+    div {
+      margin-top: 1vw;
+      .bold {
+        font-weight: bolder;
+      }
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+      .green {
+        color: green;
+      }
+    }
+  }
+
+  .computer {
+    @include shadedBorders(0.8em, rgb(192, 4, 4));
+    background-color: rgb(192, 4, 4);
+  }
+}
+
+.gameboard {
+  @include shadedBorders(0.8em, $gameboardBckgrnd);
+  margin: 0 auto;
+  background-color: $gameboardBckgrnd;
+  padding: 1vw;
+  @include borderRadius(5px);
+  .grid {
+    height: min-content;
+    width: min-content;
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    cursor: crosshair;
+    .ship {
+      color: transparent;
+      background-color: orange;
+    }
+    .hit {
+      color: transparent;
+      background-color: red;
+    }
+    .miss {
+      color: transparent;
+      background-color: $bckgrndClr;
+    }
+    .sunk {
+      color: transparent;
+      background-color: green;
+    }
+
+    div {
+      @include flexBox(center, center);
+      @include boxShadow(0 0 0.3em inset &gridGreen);
+      background-color: black;
+      height: 40px;
+      border: 0.1em solid $gridGreen;
+      animation: monitorGlow 0.3s steps(100) infinite;
+      &:hover {
+        background-color: $gridGreen;
+      }
+    }
+  }
+}

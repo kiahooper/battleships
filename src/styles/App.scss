@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron&display=swap");
-
-$bckgrndClr: #3437e6;
-$gameboardBckgrnd: #17b6ff;
-$gridGreen: rgb(0, 255, 42);
-$mainFont: "Orbitron", sans-serif;
-$headlineFont: "Black Ops One", sans-serif;
+@import "./variables";
+@import "./animations";
+@import "./mixins";
+@import "./infoBoard";
+@import "./gameboards";
+@import "./placeShips";
 
 html,
 body {
@@ -16,13 +15,9 @@ body {
   font-family: $mainFont;
 }
 
-.home {
-  padding-bottom: 2%;
-}
-
 h1 {
   font-family: $headlineFont;
-  font-size: 12vw;
+  font-size: 9.2vw;
   text-transform: uppercase;
   margin: 0;
   background: -webkit-linear-gradient(#e1ff5c, rgb(194, 18, 18));
@@ -32,120 +27,14 @@ h1 {
   -webkit-text-stroke: 0.01em black;
 }
 
-/* The typing effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+h2 {
+  font-size: 1.4vw;
+  margin: 0;
+  text-transform: uppercase;
+  margin-bottom: 1vw;
 }
 
-/* The typewriter cursor effect */
-@keyframes blink-caret {
-  from,
-  to {
-    border-color: transparent;
-  }
-  50% {
-    border-color: $gridGreen;
-  }
-}
-
-@keyframes monitorGlow {
-  from,
-  to {
-    box-shadow: 0 0 0.5em inset $gridGreen;
-  }
-  50% {
-    box-shadow: 0 0 0.6em inset $gridGreen;
-  }
-}
-
-.infoBoard {
-  background: black;
-  border-bottom: 0.5em solid grey;
-  border-left: 0.5em solid rgb(94, 94, 94);
-  border-right: 0.5em solid rgb(94, 94, 94);
-  border-top: 0.5em solid rgb(58, 58, 58);
-  padding: 1.5em;
-  margin: 0 auto;
-  width: 40%;
-  height: min-content;
-  border-radius: 3px;
-
-  h2 {
-    font-size: 2vw;
-    box-sizing: border-box;
-    max-width: min-content;
-    overflow: hidden; /* Ensures the content is not revealed until the animation */
-    border-right: 0.15em solid $gridGreen; /* The typwriter cursor */
-    white-space: nowrap; /* Keeps the content on a single line */
-    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
-    letter-spacing: 0.15em; /* Adjust as needed */
-    animation: typing 1s steps(20), blink-caret 0.75s infinite;
-  }
-}
-
-.gameboards {
-  display: flex;
-  justify-content: center;
-
-  .computerGrid {
-    background-color: red;
-    border-top: 0.8em solid rgb(252, 92, 92);
-    border-left: 0.8em solid rgb(165, 40, 40);
-    border-right: 0.8em solid rgb(165, 40, 40);
-    border-bottom: 0.8em solid rgb(105, 41, 41);
-  }
-}
-
-.gameboardGrid {
-  margin: 0 auto;
-  background-color: $gameboardBckgrnd;
-  border-top: 0.8em solid #60cdff;
-  border-left: 0.8em solid #2092c7;
-  border-right: 0.8em solid #2092c7;
-  border-bottom: 0.8em solid #296480;
-  padding: 2%;
-  width: min-content;
-  display: grid;
-  grid-template-columns: repeat(10, 40px);
-  cursor: crosshair;
-  border-radius: 5px;
-
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    min-height: 40px;
-    border: 0.1em solid $gridGreen;
-    box-shadow: 0 0 0.3em inset $gridGreen;
-    animation: monitorGlow 0.3s steps(100) infinite;
-  }
-}
-
-.placeShips {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: min-content;
-  margin: 2% auto;
-
-  button {
-    height: min-content;
-    width: 14vw;
-    text-transform: uppercase;
-    font-family: $mainFont;
-    font-size: 1.5vw;
-    padding: 0.8em;
-    color: white;
-    background-color: black;
-    border: none;
-    &:hover {
-      cursor: pointer;
-    }
-  }
+p {
+  margin: 0;
+  font-size: 1vw;
 }

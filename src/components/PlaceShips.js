@@ -1,5 +1,10 @@
 import { useState } from 'react';
 import { Gameboard } from './Gameboard';
+import carrier from '../assets/carrier.png';
+import battleship from '../assets/battleship.png';
+import destroyer from '../assets/destroyer.png';
+import submarine from '../assets/submarine.png';
+import cruiser from '../assets/cruiser.png';
 
 export const PlaceShips = (props) => {
 
@@ -7,12 +12,8 @@ export const PlaceShips = (props) => {
     const [currentShipIndex, setCurrentShipIndex] = useState(0);
     const [axis, setAxis] = useState(false);
 
-    // context??
-    // useEffect(() => {
-    //     let currentShip = gameboard.ships[currentShipIndex].name
-    //     setText(`Place your ${currentShip}`)
-    // })
-
+    const shipPng = [carrier, battleship, destroyer, submarine, cruiser];
+    
     const handlePlaceShips = (e) => {
         if (currentShipIndex < 5) {
             const x = parseInt(e.target.dataset.x);
@@ -31,7 +32,25 @@ export const PlaceShips = (props) => {
 
     return (
         <div className="placeShips">
-            <button onClick={() => {setAxis(!axis)}}>{axis ? 'Horizontal' : 'Vertical'}</button>
+            <div className="placeShipsInfo">
+            <p>Place highlighted ship by clicking on gameboard. <br></br>Click on button below to choose orientation of ship.</p>
+            <button className={`slide_${axis ? 'horizontal' : 'vertical'}`} onClick={() => {setAxis(!axis)}}>{axis ? 'Horizontal' : 'Vertical'}</button>
+            <div className="ships">
+                {gameboard.ships.map((ship, index) => {
+                    return (
+                        <div className="ship">
+                            <img src={shipPng[index]} alt={ship.name}></img>
+                            <div className="shipName"><p>{ship.name}</p></div>
+                        {ship.ship.coords.map(item => {
+                            return (
+                                <div className={`shipItem ${currentShipIndex === index ? "currentShip" : ""}`}>{item}</div>
+                            )
+                        })}
+                        </div>
+                    )
+                    })}
+            </div>
+            </div>
             < Gameboard gameboard={gameboard.board} canClick={true} handleClick={handlePlaceShips} placeShips={true}/>
         </div>
     )

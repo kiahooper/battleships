@@ -32,7 +32,7 @@ useEffect(() => {
       await setAttack(attack);
       checkForWinner()
       setBoard2([...board2]);
-      await sleep(1000);
+      await sleep(1200);
       await setAttack(null);
       await setTurn(true);
       setCanClick(true);
@@ -67,9 +67,8 @@ async function handleTurn(e) {
     }
     setCanClick(false)
     await setAttack(newAttack);
-    checkForWinner();
     setBoard1([...board1]);
-    await sleep(1000)
+    await sleep(1200)
     await setAttack(null);
     await setTurn(false);
 }
@@ -85,6 +84,17 @@ async function handleTurn(e) {
             placeShips={false}
             computer={false}
           />
+          <div className="gameRules">
+            <h2>Rules</h2>
+            <p>Players have stationed their ships at unknown coordinates.</p>
+            <p>Players will take turn taking a shot at opponent's grid.</p>
+            <p>Game Over when a player's ships have all been sunk.</p>
+            <div>
+            <p><span className="bold red">Red:</span> Target is hit</p>
+            <p><span className="bold blue">Blue:</span> Target is missed</p>
+            <p><span className="bold green">Green:</span> Ship has been sunk</p>
+            </div>
+          </div>
           < Gameboard 
             gameboard={board2} 
             canClick={canClick} 

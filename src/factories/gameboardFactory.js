@@ -85,7 +85,7 @@ const gameBoardFactory = () => {
                     return true;
                 }
             } 
-        } else if (board[attackCoordX][attackCoordY] === 'X' || board[attackCoordX][attackCoordY] === '+' || board[attackCoordX][attackCoordY] === '~') {
+        } else if (board[attackCoordX][attackCoordY] === 'x' || board[attackCoordX][attackCoordY] === '+' || board[attackCoordX][attackCoordY] === '~') {
             throw new Error('Already clicked there!');
         }
         board[attackCoordX][attackCoordY] = '~';
