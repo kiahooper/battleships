@@ -1,0 +1,31 @@
+.overlay {
+  display: none;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 9999;
+  .playAgain {
+    @include borderRadius(5px);
+    margin: 0 auto;
+    background-color: $infoGrey;
+    padding: 4%;
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    button {
+      margin: 0 2% 0 2%;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+.show {
+  display: block;
+}

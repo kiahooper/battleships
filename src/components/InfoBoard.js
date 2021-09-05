@@ -7,19 +7,21 @@ export const InfoBoard = (props) => {
     const [text, setText] = useState("");
 
     useEffect(() => {
-        if (!startGame) {
+        if (startGame === false && gameOver === false) {
             setText("Station your ships, Admiral.");
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [startGame])
 
     useEffect(() => {
-        if (startGame) {
+        if (startGame === true && gameOver === false) {
             if (turn === true) {
                 setText("Awaiting orders, Admiral...");
             } else if (turn === false) {
                 setText("Enemy aims...");
             }
         }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [turn, startGame])
 
     useEffect(() => {
@@ -40,9 +42,9 @@ export const InfoBoard = (props) => {
     }, [attack])
 
     useEffect(() => {
-        if (gameOver) {
+        if (gameOver === true) {
             if (winner === player1) {
-                setText("Congrats, the enemy fleet has been destroyed!");
+                setText("The enemy fleet has been destroyed!");
             } else if (winner === player2) {
                 setText("Game Over, your fleet has been sunk!");
             } else {

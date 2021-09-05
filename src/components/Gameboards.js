@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Gameboard } from './Gameboard';
 import { PlaceShips } from "./PlaceShips";
+import { Accordion } from "./Accordion";
 
 
 export const Gameboards = (props) => {
@@ -9,6 +10,10 @@ const {
   gameboard1, 
   gameboard2, 
   player1, player2, 
+  board1,
+  board2,
+  setBoard1,
+  setBoard2,
   checkForWinner, 
   startGame, 
   setStartGame,
@@ -18,8 +23,7 @@ const {
   gameOver
 } = props;
 
-const [board1, setBoard1] = useState(gameboard1.board);
-const [board2, setBoard2] = useState(gameboard2.board);
+
 const [canClick, setCanClick] = useState(true);
 
 const sleep = m => new Promise(r => setTimeout(r, m))
@@ -27,13 +31,13 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 useEffect(() => {
   async function handleComputerTurn() {
     try {
-      await sleep(1000);
+      //await sleep(1000);
       let attack = player2.attack()
       await setAttack(attack);
-      checkForWinner()
       setBoard2([...board2]);
-      await sleep(1200);
-      await setAttack(null);
+      //await sleep(1200);
+      await setAttack(null);      
+      await checkForWinner()
       await setTurn(true);
       setCanClick(true);
     } catch (err) {
@@ -68,11 +72,10 @@ async function handleTurn(e) {
     setCanClick(false)
     await setAttack(newAttack);
     setBoard1([...board1]);
-    await sleep(1200)
+    //await sleep(1200)
     await setAttack(null);
     await setTurn(false);
 }
-
 
   return (
     <div>
@@ -84,8 +87,8 @@ async function handleTurn(e) {
             placeShips={false}
             computer={false}
           />
-          <div className="gameRules">
-            <h2>Rules</h2>
+          < Accordion nameOfClass="gameRules" title="Rules" content={
+          <div>
             <p>Players have stationed their ships at unknown coordinates.</p>
             <p>Players will take turn taking a shot at opponent's grid.</p>
             <p>Game Over when a player's ships have all been sunk.</p>
@@ -94,7 +97,7 @@ async function handleTurn(e) {
             <p><span className="bold blue">Blue:</span> Target is missed</p>
             <p><span className="bold green">Green:</span> Ship has been sunk</p>
             </div>
-          </div>
+          </div>}/>
           < Gameboard 
             gameboard={board2} 
             canClick={canClick} 
@@ -106,6 +109,7 @@ async function handleTurn(e) {
         : 
         < PlaceShips 
           gameboard={gameboard1} 
+          board={board1}
           setStartGame={setStartGame} 
           placeShips={placeShips}
           computer={false}

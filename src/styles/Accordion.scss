@@ -1,0 +1,32 @@
+@import "./mixins";
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  height: fit-content;
+  .title {
+    h2 {
+      margin: 0 2%;
+    }
+    padding: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .content {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-in;
+  }
+
+  .content.active {
+    height: fit-content;
+    opacity: 1;
+    padding: 4%;
+  }
+}

@@ -6,10 +6,10 @@
   }
   @include flexBox(center, center);
   width: min-content;
-  margin: 2% auto;
+  margin: 3% auto;
 
   .placeShipsInfo {
-    background-color: rgb(42, 43, 49);
+    background-color: $infoGrey;
     height: max-content;
     padding: 4%;
     @include borderRadius(5px, 0, 0, 5px);
@@ -21,13 +21,13 @@
       width: 85%;
       @include borderRadius(5px, 5px, 0, 0);
       @include boxShadow(
-        inset 0 -7px 10px -7px rgba(0, 0, 0, 0.7),
+        inset 0 -7px 10px -7px rgba(0, 0, 0, 0.8),
         -3px 4px 15px -3px rgba(0, 0, 0, 0.6)
       );
     }
 
     .ships {
-      margin-top: 1vh;
+      margin: 1%;
       .ship {
         @include flexBox(center, flex-end);
         margin-top: 1vh;
@@ -77,24 +77,11 @@
     }
   }
   button {
-    @include shadedBorders(0.3rem, rgb(44, 44, 44), false);
-    outline: none;
-    height: min-content;
     width: 100%;
-    margin-top: 1vh;
-    text-transform: uppercase;
-    font-family: $mainFont;
-    font-size: 16px;
-    padding: 3%;
-    color: white;
-    background-color: $infoGrey;
+    margin-top: 2%;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    &:hover {
-      cursor: pointer;
-      color: orange;
-    }
     &::after {
       content: "";
       background: darken($infoGrey, 7%);
@@ -103,25 +90,24 @@
       display: block;
       transition: all 0.35s;
     }
-  }
-  button[class^="slide"]:hover::after {
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: all 0.35s;
-  }
-  button.slide_horizontal::after {
-    top: 0;
-    bottom: 0;
-    left: -100%;
-    right: 100%;
-  }
-
-  button.slide_vertical::after {
-    left: 0;
-    right: 0;
-    top: 100%;
-    bottom: -100%;
+    &[class^="slide"]:hover::after {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      transition: all 0.35s;
+    }
+    &.slide_horizontal::after {
+      top: 0;
+      bottom: 0;
+      left: -100%;
+      right: 100%;
+    }
+    &.slide_vertical::after {
+      left: 0;
+      right: 0;
+      top: 100%;
+      bottom: -100%;
+    }
   }
 }

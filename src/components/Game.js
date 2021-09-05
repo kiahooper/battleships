@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Gameboards } from "./Gameboards";
 import { InfoBoard } from "./InfoBoard";
+import { PlayAgain } from "./PlayAgain";
 
 export const Game = (props) => {
  
@@ -10,6 +11,9 @@ export const Game = (props) => {
     const [startGame, setStartGame] = useState(false);
     const [turn, setTurn] = useState(true);
     const [attack, setAttack] = useState(null);
+
+    const [board1, setBoard1] = useState(gameboard1.board);
+const [board2, setBoard2] = useState(gameboard2.board);
 
     const checkForWinner = () => {
         if (gameboard2.allShipsSunk() === true && gameboard1.allShipsSunk() !== true) {
@@ -47,6 +51,19 @@ export const Game = (props) => {
                 setTurn={setTurn}
                 setAttack={setAttack}
                 gameOver={gameOver}
+                board1={board1}
+                board2={board2}
+                setBoard1={setBoard1}
+                setBoard2={setBoard2}
+            />
+            < PlayAgain 
+                gameOver={gameOver} 
+                setGameOver={setGameOver} 
+                setStartGame={setStartGame} 
+                gameboard1={gameboard1} 
+                gameboard2={gameboard2}
+                setBoard1={setBoard1}
+                setBoard2={setBoard2}
             /> 
         </div>
         

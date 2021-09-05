@@ -4,6 +4,7 @@
 @import "./infoBoard";
 @import "./gameboards";
 @import "./placeShips";
+@import "./playAgain";
 @import "/node_modules/include-media/dist/_include-media.scss";
 
 html,
@@ -24,7 +25,6 @@ body {
 
 div {
   margin: 0;
-  width: 100%;
 }
 
 h1 {
@@ -40,15 +40,16 @@ h1 {
 }
 
 h2 {
+  letter-spacing: 0.1em;
   font-size: 20px;
   margin: 0;
   text-transform: uppercase;
   margin-bottom: 1vw;
-  @include media("<=1024px") {
+  @include media(">425px", "<=1024px") {
     font-size: 14px;
   }
-  @include media("<=phone") {
-    font-size: 12px;
+  @include media("<=425px") {
+    font-size: 10px;
   }
 }
 
@@ -57,5 +58,21 @@ p {
   font-size: 16px;
   @include media("<=1024px") {
     font-size: 10px;
+  }
+}
+
+button {
+  height: min-content;
+  text-transform: uppercase;
+  font-family: $mainFont;
+  font-size: 16px;
+  padding: 3%;
+  color: white;
+  background-color: $infoGrey;
+  @include shadedBorders(0.3rem, $infoGrey, false);
+  outline: none;
+  &:hover {
+    cursor: pointer;
+    color: orange;
   }
 }
