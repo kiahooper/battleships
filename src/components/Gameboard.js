@@ -26,7 +26,7 @@ export const Gameboard = (props) => {
                 return (
                     items.map((item, sIndex) => {
                         return (
-                            <div className={getItemClassName(item)} key={`${index},${sIndex}`} data-x={index} data-y={sIndex}>{ item === "#" && computer && !placeShips ? item : item }</div>
+                            <div className={getItemClassName(item)} key={`${index},${sIndex}`} data-x={index} data-y={sIndex}>{ item === "#" && computer && !placeShips ? "": item }</div>
                         )
                     })
                 )

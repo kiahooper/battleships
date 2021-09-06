@@ -13,7 +13,7 @@ export const Game = (props) => {
     const [attack, setAttack] = useState(null);
 
     const [board1, setBoard1] = useState(gameboard1.board);
-const [board2, setBoard2] = useState(gameboard2.board);
+    const [board2, setBoard2] = useState(gameboard2.board);
 
     const checkForWinner = () => {
         if (gameboard2.allShipsSunk() === true && gameboard1.allShipsSunk() !== true) {

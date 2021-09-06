@@ -4,8 +4,6 @@ export const PlayAgain = (props) => {
     const startGame = () => {
         gameboard1.clearBoard()
         gameboard2.clearBoard()
-        console.log({gameboard1})
-        console.log({gameboard2})
         setBoard1(gameboard1.board);
         setBoard2(gameboard2.board);
         setStartGame(false);
