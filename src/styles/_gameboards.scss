@@ -5,7 +5,7 @@
   @include media("<=768px") {
     flex-direction: column;
   }
-  margin: 2% auto;
+  margin: 2%;
   @include media("<=1024") {
     width: fit-content;
   }
@@ -89,8 +89,10 @@
       }
       border: 0.1em solid $gridGreen;
       animation: monitorGlow 0.4s steps(100) infinite;
-      &:hover {
-        background-color: $gridGreen;
+      @include media(">425px") {
+        &:hover {
+          background-color: $gridGreen;
+        }
       }
     }
   }
