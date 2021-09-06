@@ -45,10 +45,10 @@
 
 .gameboard {
   @include shadedBorders(0.8vw, $gameboardBckgrnd);
-  margin: 0 auto;
+  margin: 0;
   width: fit-content;
   background-color: $gameboardBckgrnd;
-  padding: 2vh;
+  padding: 1.5%;
   @include media("<=phone") {
     padding: 1vh;
   }
