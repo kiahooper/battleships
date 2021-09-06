@@ -9,11 +9,10 @@ export const Gameboards = (props) => {
 const {
   gameboard1, 
   gameboard2, 
-  player1, player2, 
-  board1,
-  board2,
-  setBoard1,
-  setBoard2,
+  setGameboard1,
+  setGameboard2,
+  player1, 
+  player2, 
   checkForWinner, 
   startGame, 
   setStartGame,
@@ -23,6 +22,7 @@ const {
   gameOver
 } = props;
 
+console.log(gameboard1.board)
 
 const [canClick, setCanClick] = useState(true);
 
@@ -31,11 +31,11 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 useEffect(() => {
   async function handleComputerTurn() {
     try {
-      //await sleep(1000);
+      await sleep(1000);
       let attack = player2.attack()
       await setAttack(attack);
-      setBoard2([...board2]);
-      //await sleep(1200);
+      setGameboard2({...gameboard2});
+      await sleep(1200);
       await setAttack(null);      
       await checkForWinner()
       await setTurn(true);
@@ -71,8 +71,8 @@ async function handleTurn(e) {
     }
     setCanClick(false)
     await setAttack(newAttack);
-    setBoard1([...board1]);
-    //await sleep(1200)
+    setGameboard1({...gameboard1});
+    await sleep(1200)
     await setAttack(null);
     await setTurn(false);
 }
@@ -82,7 +82,7 @@ async function handleTurn(e) {
       {startGame ? 
         <div className="gameboards">
           < Gameboard 
-            gameboard={board1} 
+            gameboard={gameboard1} 
             canClick={false} 
             placeShips={false}
             computer={false}
@@ -99,7 +99,7 @@ async function handleTurn(e) {
             </div>
           </div>}/>
           < Gameboard 
-            gameboard={board2} 
+            gameboard={gameboard2} 
             canClick={canClick} 
             handleClick={handleTurn} 
             placeShips={false}
@@ -109,7 +109,6 @@ async function handleTurn(e) {
         : 
         < PlaceShips 
           gameboard={gameboard1} 
-          board={board1}
           setStartGame={setStartGame} 
           placeShips={placeShips}
           computer={false}

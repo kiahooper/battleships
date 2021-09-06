@@ -8,7 +8,7 @@ import cruiser from '../assets/cruiser.png';
 
 export const PlaceShips = (props) => {
 
-    const {gameboard, board, setStartGame, placeShips} = props;
+    const {gameboard, setStartGame, placeShips} = props;
     const [currentShipIndex, setCurrentShipIndex] = useState(0);
     const [axis, setAxis] = useState(false);
 
@@ -51,7 +51,7 @@ export const PlaceShips = (props) => {
                     })}
             </div>
             </div>
-            < Gameboard gameboard={board} canClick={true} handleClick={handlePlaceShips} placeShips={true}/>
+            < Gameboard gameboard={gameboard} canClick={true} handleClick={handlePlaceShips} placeShips={true}/>
         </div>
     )
 }

@@ -2,18 +2,21 @@ import React, { useState } from "react";
 import { Gameboards } from "./Gameboards";
 import { InfoBoard } from "./InfoBoard";
 import { PlayAgain } from "./PlayAgain";
+import { Player } from "../factories/Player";
+import { ComputerPlayer } from "../factories/ComputerPlayer";
+import { gameBoardFactory } from "../factories/gameboardFactory";
 
-export const Game = (props) => {
+export const Game = () => {
  
-    const {player1, player2, gameboard1, gameboard2} = props;
+    const [gameboard1, setGameboard1] = useState(gameBoardFactory());
+    const [gameboard2, setGameboard2] = useState(gameBoardFactory());
+    const [player1, setPlayer1] = useState(Player(gameboard2));
+    const [player2, setPlayer2] = useState(ComputerPlayer(gameboard1));
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState(null); 
     const [startGame, setStartGame] = useState(false);
     const [turn, setTurn] = useState(true);
     const [attack, setAttack] = useState(null);
-
-    const [board1, setBoard1] = useState(gameboard1.board);
-    const [board2, setBoard2] = useState(gameboard2.board);
 
     const checkForWinner = () => {
         if (gameboard2.allShipsSunk() === true && gameboard1.allShipsSunk() !== true) {
@@ -27,6 +30,16 @@ export const Game = (props) => {
             setGameOver(true);
         }
     };  
+
+    const resetGame = () => {
+        setGameboard1(gameBoardFactory());
+        setGameboard2(gameBoardFactory());
+        setPlayer1(Player(gameboard1));
+        setPlayer2(ComputerPlayer(gameboard2));
+        setGameOver(false);
+        setWinner(null);
+        setStartGame(false);
+      }
 
     return (
         <div>
@@ -42,6 +55,8 @@ export const Game = (props) => {
             < Gameboards 
                 gameboard1={gameboard1} 
                 gameboard2={gameboard2} 
+                setGameboard1={setGameboard1}
+                setGameboard2={setGameboard2}
                 player1={player1} 
                 player2={player2} 
                 checkForWinner={checkForWinner} 
@@ -51,19 +66,10 @@ export const Game = (props) => {
                 setTurn={setTurn}
                 setAttack={setAttack}
                 gameOver={gameOver}
-                board1={board1}
-                board2={board2}
-                setBoard1={setBoard1}
-                setBoard2={setBoard2}
             />
             < PlayAgain 
                 gameOver={gameOver} 
-                setGameOver={setGameOver} 
-                setStartGame={setStartGame} 
-                gameboard1={gameboard1} 
-                gameboard2={gameboard2}
-                setBoard1={setBoard1}
-                setBoard2={setBoard2}
+                resetGame={resetGame}
             /> 
         </div>
         

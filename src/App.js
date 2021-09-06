@@ -1,10 +1,11 @@
-import { Home } from './components/Home';
+import { Game } from './components/Game';
 import './styles/App.scss';
 
 function App() {
   return (
     <div>
-      < Home />
+      <h1>Battleships</h1>
+      < Game />
     </div>
   );
 }
