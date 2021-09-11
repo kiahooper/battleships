@@ -2,8 +2,6 @@ export const Gameboard = (props) => {
 
     const {gameboard, canClick, handleClick, placeShips, computer} = props;
     
-console.log(gameboard)
-
     const getItemClassName = (item) => {
         if (item === "#" && !computer) {
             return 'ship'

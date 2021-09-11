@@ -8,7 +8,8 @@
 @import "/node_modules/include-media/dist/_include-media.scss";
 
 html,
-body {
+body,
+#root {
   height: 100vh;
   width: 100vw;
   margin: 0;
@@ -20,6 +21,8 @@ body {
   box-sizing: border-box;
   text-align: center;
   color: white;
+  height: 100%;
+  width: 100%;
 }
 
 div {
@@ -28,7 +31,7 @@ div {
 
 h1 {
   font-family: $headlineFont;
-  font-size: 9.2vw;
+  font-size: 8vw;
   text-transform: uppercase;
   margin: 0;
   background: -webkit-linear-gradient(#e1ff5c, rgb(194, 18, 18));

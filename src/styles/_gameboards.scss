@@ -3,7 +3,7 @@
 .gameboards {
   @include flexBox(center, center);
   @include media("<=768px") {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
   margin: 2%;
   @include media("<=1024") {
@@ -45,21 +45,22 @@
 
 .gameboard {
   @include shadedBorders(0.8vw, $gameboardBckgrnd);
-  margin: 0;
-  width: fit-content;
+  margin: 1% 0;
+  width: min-content;
+  height: min-content;
   background-color: $gameboardBckgrnd;
   padding: 1.5%;
-  @include media("<=phone") {
-    padding: 1vh;
+  @include media("<=768px") {
+    order: 1;
   }
   @include borderRadius(5px);
   .grid {
     height: min-content;
     width: min-content;
     display: grid;
-    grid-template-columns: repeat(10, 4vh);
+    grid-template-columns: repeat(10, 30px);
     @include media("<=1025px") {
-      grid-template-columns: repeat(10, 3vh);
+      grid-template-columns: repeat(10, 20px);
     }
     cursor: crosshair;
     .ship {
@@ -83,9 +84,9 @@
       @include flexBox(center, center);
       @include boxShadow(0 0 0.3em inset &gridGreen);
       background-color: black;
-      height: 4vh;
+      height: 30px;
       @include media("<=1025px") {
-        height: 3vh;
+        height: 20px;
       }
       border: 0.1em solid $gridGreen;
       animation: monitorGlow 0.4s steps(100) infinite;

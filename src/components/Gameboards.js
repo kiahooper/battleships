@@ -22,8 +22,6 @@ const {
   gameOver
 } = props;
 
-console.log(gameboard1.board)
-
 const [canClick, setCanClick] = useState(true);
 
 const sleep = m => new Promise(r => setTimeout(r, m))
@@ -31,11 +29,11 @@ const sleep = m => new Promise(r => setTimeout(r, m))
 useEffect(() => {
   async function handleComputerTurn() {
     try {
-      await sleep(1000);
+      //await sleep(1000);
       let attack = player2.attack()
       await setAttack(attack);
       setGameboard2({...gameboard2});
-      await sleep(1200);
+      //await sleep(1200);
       await setAttack(null);      
       await checkForWinner()
       await setTurn(true);
@@ -72,7 +70,7 @@ async function handleTurn(e) {
     setCanClick(false)
     await setAttack(newAttack);
     setGameboard1({...gameboard1});
-    await sleep(1200)
+    //await sleep(1200)
     await setAttack(null);
     await setTurn(false);
 }
