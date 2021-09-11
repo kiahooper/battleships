@@ -9,7 +9,7 @@ test('expect coords to be array of given length', () => {
 test('expect hit', () => {
     const ship = Ship(3);
     ship.hit(0);
-    expect(ship.coords[0]).toBe('X');
+    expect(ship.coords[0]).toBe('x');
 });
 
 test('expect sunk', () => {

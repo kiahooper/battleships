@@ -12,17 +12,31 @@ test("expect 4 surrounding targets around 'attack'", () => {
 test("expect corner attack to have 2 surrounding targets", () => {
     const enemyGameBoard = gameBoardFactory();
     const player = ComputerPlayer(enemyGameBoard); 
-    player.addTargets('0,0');
-    expect(player.targets.length).toStrictEqual(2);
+    let targets = [[0,0],[-1,0],[1,0],[0,-1]]
+    targets = player.filterTargets(targets);
+    expect(targets.length).toStrictEqual(2);
 })
 
 test("expect attack with previous hit in targets to have 3 surrounding targets", () => {
     const enemyGameBoard = gameBoardFactory();
     const player = ComputerPlayer(enemyGameBoard); 
+    let targets = [[1,0],[2,1],[1,2],[2,0]];
     player.previousAttacks.push("1,0");
-    player.addTargets('1,1');
-    expect(player.targets.length).toStrictEqual(3);
-    expect(player.targets).not.toContain("1,0");
+    targets = player.filterTargets(targets);
+    expect(targets.length).toStrictEqual(3);
+    expect(targets).not.toContain("1,0");
+})
+
+test("expect orientation specific targets after 2 successfull hits", () => {
+    const enemyGameBoard = gameBoardFactory();
+    const player = ComputerPlayer(enemyGameBoard); 
+    let targets = [[1,0],[2,1],[1,2],[2,0],[1,3],[2,2],[3,2]];
+    player.previousAttacks.push("1,1");
+    player.previousAttacks.push("1,2");
+    let hits = ['1,1','1,2'];
+    targets = player.filterTargets(targets);
+    let lineTargets = player.filterTargetsForShipLines(targets, hits);
+    expect(lineTargets).toStrictEqual([[1,0],[1,3]]);
 })
 
 test("expect previous attacks to be mapped on densityMap", () => {
@@ -83,4 +97,13 @@ test("expect hunt attack to be at highest probability", () => {
     densityMap = player.calculateDensities(densityMap);
     let coord = (player.getHuntAttack()).split(",");
     expect(densityMap[coord[0]][coord[1]]).toStrictEqual(34);
+})
+
+test("expect no errors in a game", () => {
+    const enemyGameBoard = gameBoardFactory();
+    const player = ComputerPlayer(enemyGameBoard); 
+    for(let i=0; i<100; i++) {
+        expect(player.attack()).toBe(false);
+    }
+    
 })

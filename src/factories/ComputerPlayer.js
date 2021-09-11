@@ -2,12 +2,13 @@ export const ComputerPlayer = (enemyGameboard) => {
 
     let mode = "hunt";
     let previousAttacks = [];
-    let successfullTargets = [];
+    let hitTargets = [];
     let targets = [];
+    let lineTargets = []; 
     let shipsSunk = [];
 
     const attack = () => {
-
+        
         let attack;
 
         if (mode === "hunt") {
@@ -17,23 +18,22 @@ export const ComputerPlayer = (enemyGameboard) => {
             attack = getTargetAttack();
         }
 
-        console.log(attack)
-
         previousAttacks.push(attack);
         let newAttack = enemyGameboard.receiveAttack(attack.split(",")[0], attack.split(",")[1]);
 
-        if (newAttack === true) {
-            if (newAttack.name !== undefined) {
-                shipsSunk.push(newAttack.name);
-                targets.splice(0, targets.length);
-                successfullTargets.splice(0, targets.length);
-                mode = "hunt";
-            } else {
-                addTargets(attack);
-                mode = "target";
-            }
+        if (newAttack.name !== undefined) {
+            shipsSunk.push(newAttack.name);
+            targets.length = 0;
+            lineTargets.length = 0;
+            mode = "hunt";
+            return newAttack;
+
+        } else if (newAttack === true) {
+            addTargets(attack);
+            mode = "target";
             return newAttack;
         }
+
         return false;
     }
 
@@ -46,19 +46,35 @@ export const ComputerPlayer = (enemyGameboard) => {
 
         targets.splice(0,0,[coordX,(coordY-1)], [coordX,(coordY+1)], [(coordX-1),coordY], [(coordX+1),coordY]);
 
-        successfullTargets.push(hit);
+        targets = filterTargets(targets);
+        
+        hitTargets.push(hit);
 
-        filterTargets(targets);
+        if (hitTargets.length === 2) {
+            lineTargets = filterTargetsForShipLines(targets, hitTargets);
+            
+        }
     }
 
     const getTargetAttack = () => {
 
-        let coord = targets[0];
+        console.log({lineTargets})
+        let coord; 
+
+        targets = filterTargets(targets);
+
+        if (lineTargets.length > 0) {
+            coord = lineTargets[0];
+            lineTargets.splice(0,1);
+
+        } else {
+            coord = targets[0];
+            targets.splice(0,1);
+        }
+
         let coordX = parseInt(coord[0]);
         let coordY = parseInt(coord[1]);
         let attack = `${coordX},${coordY}`;
-
-        targets.splice(0,1);
 
         if (targets.length === 0) {
             mode = "hunt";
@@ -67,33 +83,36 @@ export const ComputerPlayer = (enemyGameboard) => {
         return attack
     }
 
-    const filterTargets = (targets) => {
+    const filterTargets = (targetArr) => {
 
         // Filter for out of bounds 
-        let filteredTargets = targets.filter(coord => (coord.filter(e => e >= 0 && e <= 9).length === 2));
+        let filteredTargets = targetArr.filter(coord => (coord.filter(e => e >= 0 && e <= 9).length === 2));
 
         // Filter for previous hits
         filteredTargets = filteredTargets.filter(coord => previousAttacks.indexOf(coord.join(",")) === -1);
 
-        // Filter for orientation
-        if (successfullTargets.length === 2) {
-            const x = successfullTargets.map(coord => (coord.split(","))[0]);
-            const y = successfullTargets.map(coord => (coord.split(","))[1]);
-            const xLen = [...new Set(x)].length;
-            const yLen = [...new Set(y)].length;
-
-            if (xLen < yLen) {
-                filteredTargets = filteredTargets.filter(coord => parseInt(coord[0]) === parseInt(x[0]));
-            }
-            else {
-                filteredTargets = filteredTargets.filter(coord => parseInt(coord[0]) === parseInt(y[0]));
-            }
-        }
-
-        targets.splice(0, targets.length);
-        filteredTargets.map(coord => targets.push(coord));
+        return filteredTargets
     }
 
+    const filterTargetsForShipLines = (targetArr, hitTargetArr) => {
+
+        const x = hitTargetArr.map(coord => (coord.split(","))[0]);
+        const y = hitTargetArr.map(coord => (coord.split(","))[1]);
+        const xLen = [...new Set(x)].length;
+        const yLen = [...new Set(y)].length;
+
+        let filteredTargets;        
+        if (xLen < yLen) {
+            filteredTargets = targetArr.filter(coord => parseInt(coord[0]) === parseInt(x[0]));
+        }
+        else if (yLen < xLen) {
+            filteredTargets = targetArr.filter(coord => parseInt(coord[1]) === parseInt(y[0]));
+        }
+
+        hitTargetArr.length = 0;
+        
+        return filteredTargets;
+    }
 
    const getHuntAttack = () => {
 
@@ -107,7 +126,7 @@ export const ComputerPlayer = (enemyGameboard) => {
         maxPropability = Math.max(...maxPropability);
         
         let maxIndexes = [];
-
+        
         for (let i=0; i<densityMap.length; i++) {
             for (let j=0; j<densityMap[i].length; j++) {
                 if (densityMap[i][j] === maxPropability) {
@@ -116,8 +135,7 @@ export const ComputerPlayer = (enemyGameboard) => {
             }
         }
 
-        console.log(maxIndexes)
-        //return maxIndex;
+        return (maxIndexes[(Math.floor(Math.random() * maxIndexes.length))]).join(",");
     }
 
     const calculateDensities = (densityMap) => {
@@ -196,6 +214,8 @@ export const ComputerPlayer = (enemyGameboard) => {
          attack,
          addTargets,
          targets,
+         filterTargets,
+         filterTargetsForShipLines,
          getTargetAttack,
          previousAttacks,
          getHuntAttack,
