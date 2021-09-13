@@ -32,3 +32,21 @@
   -moz-border-radius: $topLeft $topRight $bottomRight $bottomLeft;
   border-radius: $topLeft $topRight $bottomRight $bottomLeft;
 }
+
+@mixin mobile {
+  @media (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 1025px) and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin fourK {
+  @media (min-width: 2560px) {
+    @content;
+  }
+}

@@ -25,6 +25,7 @@ export const ComputerPlayer = (enemyGameboard) => {
             shipsSunk.push(newAttack.name);
             targets.length = 0;
             lineTargets.length = 0;
+            hitTargets.length = 0
             mode = "hunt";
             return newAttack;
 
@@ -52,13 +53,11 @@ export const ComputerPlayer = (enemyGameboard) => {
 
         if (hitTargets.length === 2) {
             lineTargets = filterTargetsForShipLines(targets, hitTargets);
-            
         }
     }
 
     const getTargetAttack = () => {
 
-        console.log({lineTargets})
         let coord; 
 
         targets = filterTargets(targets);
@@ -98,6 +97,8 @@ export const ComputerPlayer = (enemyGameboard) => {
 
         const x = hitTargetArr.map(coord => (coord.split(","))[0]);
         const y = hitTargetArr.map(coord => (coord.split(","))[1]);
+
+        
         const xLen = [...new Set(x)].length;
         const yLen = [...new Set(y)].length;
 
@@ -109,8 +110,6 @@ export const ComputerPlayer = (enemyGameboard) => {
             filteredTargets = targetArr.filter(coord => parseInt(coord[1]) === parseInt(y[0]));
         }
 
-        hitTargetArr.length = 0;
-        
         return filteredTargets;
     }
 

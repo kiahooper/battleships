@@ -32,10 +32,14 @@ export const Game = () => {
     };  
 
     const resetGame = () => {
-        setGameboard1(gameBoardFactory());
-        setGameboard2(gameBoardFactory());
-        setPlayer1(Player(gameboard1));
-        setPlayer2(ComputerPlayer(gameboard2));
+        const newGameboard1 = gameBoardFactory();
+        const newGameboard2 = gameBoardFactory();
+        const newPlayer1 = Player(newGameboard2);
+        const newPlayer2 = ComputerPlayer(newGameboard1);
+        setGameboard1(newGameboard1);
+        setGameboard2(newGameboard2);
+        setPlayer1(newPlayer1);
+        setPlayer2(newPlayer2);
         setGameOver(false);
         setWinner(null);
         setStartGame(false);

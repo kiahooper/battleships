@@ -5,11 +5,8 @@
   background: black;
   padding: 1%;
   margin: 0 auto;
-  width: 40%;
-  @include media("<=1025px") {
-    width: 50%;
-  }
-  @include media("<=425px") {
+  width: 50%;
+  @include mobile {
     width: 90%;
   }
   height: min-content;

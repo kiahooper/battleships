@@ -16,6 +16,19 @@ body,
   background: radial-gradient(circle at center, $bckgrndClr, black);
 }
 
+:root {
+  font-size: 16px;
+  @include tablet {
+    font-size: 12px;
+  }
+  @include mobile {
+    font-size: 10px;
+  }
+
+  @include fourK {
+    font-size: 40px;
+  }
+}
 .app {
   font-family: $mainFont;
   box-sizing: border-box;
@@ -31,7 +44,10 @@ div {
 
 h1 {
   font-family: $headlineFont;
-  font-size: 8vw;
+  font-size: 7rem;
+  @include mobile {
+    font-size: 4rem;
+  }
   text-transform: uppercase;
   margin: 0;
   background: -webkit-linear-gradient(#e1ff5c, rgb(194, 18, 18));
@@ -43,32 +59,22 @@ h1 {
 
 h2 {
   letter-spacing: 0.1em;
-  font-size: 20px;
+  font-size: 1rem;
   margin: 0;
   text-transform: uppercase;
-  margin-bottom: 1vw;
-  @include media(">425px", "<=1024px") {
-    font-size: 14px;
-  }
-  @include media("<=425px") {
-    font-size: 10px;
-  }
 }
 
 p {
   margin: 0;
-  font-size: 16px;
-  @include media("<=1024px") {
-    font-size: 10px;
-  }
+  font-size: 1rem;
 }
 
 button {
   height: min-content;
   text-transform: uppercase;
   font-family: $mainFont;
-  font-size: 16px;
-  padding: 2%;
+  font-size: 0.9rem;
+  padding: 1%;
   color: white;
   background-color: $infoGrey;
   @include shadedBorders(0.3rem, $infoGrey, false);

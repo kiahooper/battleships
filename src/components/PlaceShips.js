@@ -15,18 +15,22 @@ export const PlaceShips = (props) => {
     const shipPng = [carrier, battleship, destroyer, submarine, cruiser];
     
     const handlePlaceShips = (e) => {
-        if (currentShipIndex < 5) {
-            const x = parseInt(e.target.dataset.x);
-            const y = parseInt(e.target.dataset.y);
-            let direction = axis ? 1 : 0;
-            if (placeShips(x,y,gameboard.ships[currentShipIndex], direction) === false) {
-                return;
-            } else if (currentShipIndex === 4) {
-                setCurrentShipIndex(0);
-                setStartGame(true);
-            } else {
-                setCurrentShipIndex(currentShipIndex + 1)
+        try {
+            if (currentShipIndex < 5) {
+                const x = parseInt(e.target.dataset.x);
+                const y = parseInt(e.target.dataset.y);
+                let direction = axis ? 1 : 0;
+                if (placeShips(x,y,gameboard.ships[currentShipIndex], direction) === false) {
+                    return;
+                } else if (currentShipIndex === 4) {
+                    setCurrentShipIndex(0);
+                    setStartGame(true);
+                } else {
+                    setCurrentShipIndex(currentShipIndex + 1)
+                }
             }
+        } catch (err) {
+            console.log(err.message);
         }
     }
 

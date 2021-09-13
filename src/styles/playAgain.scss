@@ -11,14 +11,14 @@
     @include borderRadius(5px);
     margin: 0 auto;
     background-color: $infoGrey;
-    padding: 4%;
+    padding: 3%;
     width: fit-content;
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     button {
-      margin: 0 2% 0 2%;
+      margin-top: 5%;
       &:hover {
         transform: scale(1.1);
       }
