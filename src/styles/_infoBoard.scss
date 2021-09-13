@@ -1,5 +1,3 @@
-@import "/node_modules/include-media/dist/_include-media.scss";
-
 .infoBoard {
   @include shadedBorders(0.6vw, rgb(90, 103, 116), invert);
   background: black;

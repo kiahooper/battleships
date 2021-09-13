@@ -1,5 +1,3 @@
-@import "/node_modules/include-media/dist/_include-media.scss";
-
 .placeShips {
   @include mobile {
     flex-direction: column-reverse;
@@ -12,7 +10,7 @@
   .placeShipsInfo {
     box-sizing: border-box;
     background-color: $infoGrey;
-    padding: 2%;
+    padding: 1%;
     width: 20%;
     @include borderRadius(5px, 0, 0, 5px);
     @include boxShadow(

@@ -4,6 +4,9 @@
   @include mobile {
     flex-direction: column-reverse;
   }
+  @include tablet {
+    flex-direction: column-reverse;
+  }
   @media (orientation: landscape) {
     flex-direction: row;
   }
@@ -15,7 +18,7 @@
     padding: 1.5%;
     margin: 1.5%;
     min-width: 250px;
-    width: min-content;
+    max-width: 20%;
     @include borderRadius(3px);
     @include boxShadow(-3px 4px 15px -3px rgba(0, 0, 0, 0.6));
     p {
@@ -63,6 +66,9 @@
     @include mobile {
       grid-template-columns: repeat(10, 20px);
     }
+    @include fourK {
+      grid-template-columns: repeat(10, 70px);
+    }
     cursor: crosshair;
     .ship {
       color: transparent;
@@ -86,8 +92,14 @@
       @include boxShadow(0 0 0.3em inset &gridGreen);
       background-color: black;
       height: 30px;
+      width: 30px;
       @include mobile {
         height: 20px;
+        width: 20px;
+      }
+      @include fourK {
+        height: 70px;
+        width: 70px;
       }
       border: 0.1em solid $gridGreen;
       animation: monitorGlow 0.4s steps(100) infinite;
